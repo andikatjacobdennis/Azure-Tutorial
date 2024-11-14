@@ -1,7 +1,3 @@
-Certainly! Below is an expanded version of the `README` with 10 more tutorials added under the **Tutorials** section, covering a variety of Azure services and use cases.
-
----
-
 # Azure-Tutorial
 
 Welcome to the **Azure-Tutorial** repository! This repository provides hands-on examples and detailed tutorials for getting started with Microsoft Azure, the cloud computing platform provided by Microsoft. Whether you're new to Azure or looking to deepen your understanding, this guide will help you explore key concepts and services available in Azure.
