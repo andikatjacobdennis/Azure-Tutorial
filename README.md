@@ -185,6 +185,14 @@ Azure integrates seamlessly with developer ecosystems:
 
 Subscription and Account
 
-Creating resource
+Creating resourcea
+
+Searching resource
+
+removing resource
+
+Azure CLI and powershell
+
+
 
 
