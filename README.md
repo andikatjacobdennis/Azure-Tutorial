@@ -192,7 +192,9 @@ Searching resource
 removing resource
 
 Azure CLI and powershell
-
+  -  Azure cloud shell
+  -  az group create -l westus -n CLITest-rg
+  -  
 
 
 
