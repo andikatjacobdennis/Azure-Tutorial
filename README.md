@@ -198,5 +198,7 @@ Azure CLI and powershell
 
 What is a resource group with example
 
+Resource Group vs Subscription
 
+Management Group
 
