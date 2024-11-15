@@ -194,7 +194,7 @@ removing resource
 Azure CLI and powershell
   -  Azure cloud shell
   -  az group create -l westus -n CLITest-rg
-  -  
+  -  New-AzResourceGroup -Name PSTest-rg -Location westus 
 
 
 
