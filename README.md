@@ -71,6 +71,11 @@ Cloud computing services are categorized into **IaaS**, **PaaS**, and **SaaS**, 
 
 ---
 
+Introduction to Azure
 
+Regions and Zones
 
+Paired Regions
+
+Azure Service
 
