@@ -183,22 +183,155 @@ Azure integrates seamlessly with developer ecosystems:
 
 ---
 
-Subscription and Account
+## **1. Subscription and Account**
 
-Creating resourcea
+An **Azure Subscription** is a logical container used to provision and manage Azure resources. It associates resources with billing, access control, and organizational policies.
 
-Searching resource
+### Key Concepts:
+- **Account**: Your Microsoft account or organizational account used to access Azure.
+- **Subscription**: A container linked to your account. Resources within a subscription share the same billing relationship.
+- **Billing**: Each subscription generates a separate bill.
 
-removing resource
+### Types of Subscriptions:
+- **Free Tier**: Includes $200 in credits and access to many free services for 12 months.
+- **Pay-As-You-Go**: Charges you based on usage.
+- **Enterprise Agreement**: Designed for large organizations with customized pricing.
 
-Azure CLI and powershell
-  -  Azure cloud shell
-  -  az group create -l westus -n CLITest-rg
-  -  New-AzResourceGroup -Name PSTest-rg -Location westus 
+---
 
-What is a resource group with example
+## **2. Creating Resources**
 
-Resource Group vs Subscription
+Azure resources include virtual machines, databases, storage accounts, and more. Resources are grouped within **resource groups** for easy management.
 
-Management Group
+### Steps to Create a Resource in the Azure Portal:
+1. Log in to the [Azure Portal](https://portal.azure.com).
+2. Click on **Create a Resource**.
+3. Choose a resource type (e.g., Virtual Machine, Storage Account).
+4. Provide configuration details like name, region, and pricing tier.
+5. Assign the resource to a **Resource Group**.
+6. Click **Review + Create** to validate the configuration, then click **Create**.
+
+---
+
+## **3. Searching Resources**
+
+Searching resources is crucial for managing complex Azure environments.
+
+### Using the Azure Portal:
+1. Navigate to the **Search Bar** at the top of the portal.
+2. Enter the resource name, type, or tags.
+3. Select the resource from the search results to view or manage it.
+
+### Using Azure CLI:
+```bash
+az resource list --name <resource-name>
+```
+
+### Using PowerShell:
+```powershell
+Get-AzResource -Name <resource-name>
+```
+
+---
+
+## **4. Removing Resources**
+
+Azure resources can be removed when no longer needed to avoid unnecessary costs.
+
+### Using the Azure Portal:
+1. Locate the resource in the portal.
+2. Open the resource and click **Delete**.
+3. Confirm the deletion.
+
+### Using Azure CLI:
+```bash
+az resource delete --name <resource-name> --resource-group <resource-group-name>
+```
+
+### Using PowerShell:
+```powershell
+Remove-AzResource -Name <resource-name> -ResourceGroupName <resource-group-name>
+```
+
+---
+
+## **5. Azure CLI and PowerShell**
+
+Azure CLI and PowerShell are powerful tools for managing Azure resources programmatically.
+
+### **Azure Cloud Shell**
+Azure Cloud Shell is an interactive, browser-based shell available in the Azure Portal. It supports both Bash (for Azure CLI) and PowerShell.
+
+- **To Access Cloud Shell**: 
+  - Log in to the Azure Portal.
+  - Click the **Cloud Shell** icon in the top navigation bar.
+- **Pre-installed Tools**: Includes Azure CLI, PowerShell, Git, and more.
+
+### **Example: Azure CLI**
+#### Create a Resource Group:
+```bash
+az group create -l westus -n CLITest-rg
+```
+- `-l`: Specifies the location (e.g., `westus`).
+- `-n`: Specifies the resource group name.
+
+### **Example: PowerShell**
+#### Create a Resource Group:
+```powershell
+New-AzResourceGroup -Name PSTest-rg -Location westus
+```
+
+---
+
+## **6. What is a Resource Group?**
+
+A **Resource Group** is a container that holds related Azure resources. It simplifies resource management by grouping resources with similar lifecycle, permissions, or dependencies.
+
+### Example:
+Suppose you're deploying a web application. You can create a resource group called **WebApp-RG** that includes:
+- A Virtual Machine for the application server.
+- A Storage Account for files and media.
+- A SQL Database for data storage.
+
+---
+
+## **7. Resource Group vs Subscription**
+
+| **Aspect**           | **Resource Group**                          | **Subscription**                               |
+|-----------------------|---------------------------------------------|------------------------------------------------|
+| **Definition**        | A logical container for related resources. | A container for billing and access policies.   |
+| **Scope**             | Grouped resources (e.g., VMs, databases).  | Can include multiple resource groups.          |
+| **Billing**           | Not directly tied to billing.              | Generates a bill for all resources within it.  |
+| **Purpose**           | Organizational and lifecycle management.   | Budgeting, billing, and overall access control.|
+
+### Relationship:
+- A **subscription** contains one or more **resource groups**.
+- A **resource group** cannot span multiple subscriptions.
+
+---
+
+## **8. Management Group**
+
+An **Azure Management Group** provides a way to organize multiple subscriptions under a single hierarchy. This is useful for enterprises managing multiple subscriptions.
+
+### Features:
+- **Policy Application**: Apply Azure Policies and Role-Based Access Control (RBAC) across subscriptions.
+- **Hierarchy**: Create a tree-like structure for subscriptions.
+- **Cost Management**: View aggregated costs across subscriptions.
+
+### Example:
+- Parent Management Group: **Organization-MG**
+  - Child 1: **IT-MG** (Subscription for IT projects).
+  - Child 2: **Marketing-MG** (Subscription for marketing campaigns).
+
+**Command to Create Management Group (CLI)**:
+```bash
+az account management-group create --name <management-group-name>
+```
+
+---
+
+### Conclusion
+
+Managing resources in Azure involves understanding subscriptions, resource groups, and tools like Azure CLI and PowerShell. By grouping resources logically and using automated tools, you can streamline deployments, enforce policies, and monitor costs efficiently. Whether you're a developer or an IT administrator, mastering these Azure features is key to unlocking the full potential of the platform.
 
