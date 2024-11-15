@@ -331,4 +331,10 @@ az account management-group create --name <management-group-name>
 
 ---
 
+Storage Account
+
+SLA
+  -  Service level agreement
+  - the uptime percentage of cloud service with table
+
 
