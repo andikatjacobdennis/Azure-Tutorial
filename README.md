@@ -331,7 +331,4 @@ az account management-group create --name <management-group-name>
 
 ---
 
-### Conclusion
-
-Managing resources in Azure involves understanding subscriptions, resource groups, and tools like Azure CLI and PowerShell. By grouping resources logically and using automated tools, you can streamline deployments, enforce policies, and monitor costs efficiently. Whether you're a developer or an IT administrator, mastering these Azure features is key to unlocking the full potential of the platform.
 
