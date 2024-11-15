@@ -180,7 +180,9 @@ Azure integrates seamlessly with developer ecosystems:
 - **Azure Functions**: Build serverless applications.
 - **Azure Logic Apps**: Automate workflows and integrate with third-party systems.
 
+
 ---
 
+Subscription and Account
 
 
