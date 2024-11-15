@@ -185,4 +185,4 @@ Azure integrates seamlessly with developer ecosystems:
 
 Subscription and Account
 
-
+Creating resource
