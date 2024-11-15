@@ -331,14 +331,116 @@ az account management-group create --name <management-group-name>
 
 ---
 
-Storage Account
+## **1. Storage Account**
 
-SLA
-  -  Service level agreement
-  - the uptime percentage of cloud service with table
+An **Azure Storage Account** is a service that provides scalable and secure cloud storage for unstructured and structured data. It supports various types of storage services, such as blobs, files, queues, tables, and disks.
 
-SLA Calculator
-  -  
-Cost
-  -  pricing model
-  -  Example
+### Types of Storage in Azure:
+1. **Blob Storage**: Optimized for unstructured data like images, videos, and backups.
+2. **File Storage**: Provides managed file shares for use in the cloud or on-premises.
+3. **Queue Storage**: Enables message storage for reliable communication between applications.
+4. **Table Storage**: Offers NoSQL storage for structured data.
+5. **Disk Storage**: Persistent storage for Azure Virtual Machines.
+
+### Steps to Create a Storage Account:
+1. Log in to the [Azure Portal](https://portal.azure.com).
+2. Navigate to **Create a Resource** > **Storage** > **Storage Account**.
+3. Specify the following:
+   - **Resource Group**: Assign or create a resource group.
+   - **Region**: Choose the region where the data will be stored.
+   - **Performance Tier**: Standard (cost-efficient) or Premium (low-latency).
+   - **Replication**: LRS, ZRS, GRS, or RA-GRS (explained below).
+4. Click **Review + Create** and then **Create**.
+
+### Storage Redundancy Options:
+| **Replication**       | **Description**                                                                                 |
+|------------------------|-------------------------------------------------------------------------------------------------|
+| **LRS**               | Locally Redundant Storage: Copies data within a single datacenter.                              |
+| **ZRS**               | Zone-Redundant Storage: Replicates data across multiple availability zones in a region.         |
+| **GRS**               | Geo-Redundant Storage: Copies data to a secondary region for disaster recovery.                 |
+| **RA-GRS**            | Read-Access Geo-Redundant Storage: Adds read access to the secondary copy in a different region.|
+
+---
+
+## **2. SLA (Service Level Agreement)**
+
+An **SLA** is a formal contract between a service provider (Azure) and its customers that defines the expected level of service. Azure SLAs typically guarantee:
+1. **Uptime**: The percentage of time a service is available.
+2. **Performance**: Commitments to response times and throughput.
+3. **Remedies**: Compensation (usually credits) for SLA breaches.
+
+### Uptime SLA Table for Azure Services:
+| **Service**                    | **Uptime Guarantee**  |
+|--------------------------------|-----------------------|
+| **Virtual Machines**           | 99.9% (Single VM)    |
+| **Storage Account**            | 99.9% - 99.99%       |
+| **SQL Database (Basic)**       | 99.99%               |
+| **Azure Kubernetes Service**   | 99.95%               |
+
+### Uptime Example:
+- **99.9% uptime** allows for 8.76 hours of downtime per year.
+- **99.99% uptime** allows for only 52.56 minutes of downtime per year.
+
+### Calculating Downtime from SLA:
+To calculate downtime:
+1. **Downtime (per month)** = (1 - Uptime%) × Total Minutes in a Month.
+2. Example:
+   - For a 99.9% SLA: `(1 - 0.999) × (30 days × 24 hours × 60 minutes)` = 43.2 minutes of allowed downtime.
+
+---
+
+## **3. SLA Calculator**
+
+Azure provides an **SLA Calculator** to estimate the cumulative SLA for multiple services in a solution. If your application relies on multiple services, the combined SLA is lower than the individual SLAs.
+
+### Combined SLA Formula:
+\[
+\text{Combined SLA} = \text{SLA(Service A)} \times \text{SLA(Service B)} \times \dots
+\]
+
+### Example:
+An application using two services:
+1. Service A: 99.95%
+2. Service B: 99.9%
+
+Combined SLA:
+\[
+99.95\% \times 99.9\% = 99.85\%
+\]
+
+You can use the [Azure SLA Calculator](https://azure.microsoft.com/en-us/sla-calculator/) to simplify this process.
+
+---
+
+## **4. Cost in Azure**
+
+Azure's pricing is flexible, pay-as-you-go, and depends on factors like resource type, usage, region, and redundancy level.
+
+### Azure Pricing Models:
+1. **Pay-As-You-Go**: Charges based on actual usage.
+2. **Reserved Instances**: Pre-pay for resources for 1 or 3 years at discounted rates.
+3. **Spot Pricing**: Discounts for unused compute capacity (suitable for interruptible workloads).
+4. **Free Tier**: Access to free services and credits for 12 months.
+
+### Cost Factors:
+- **Resource Type**: VMs, storage, or databases.
+- **Region**: Costs vary between regions.
+- **Performance Tier**: Standard or premium performance.
+- **Usage**: Amount of storage, compute hours, or data transfer.
+
+### Example Pricing for a Storage Account:
+| **Service**                    | **Price (Approx.)**              |
+|--------------------------------|----------------------------------|
+| **Blob Storage (Hot Tier)**    | $0.0184 per GB per month         |
+| **Blob Storage (Cool Tier)**   | $0.01 per GB per month           |
+| **RA-GRS Replication**         | $0.04 per GB per month           |
+| **Operations**                 | $0.0004 per 1,000 operations     |
+
+### Estimating Costs:
+To estimate the cost of resources:
+1. Use the [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/).
+2. Select the services you need.
+3. Configure region, redundancy, and expected usage to get a cost estimate.
+
+---
+
