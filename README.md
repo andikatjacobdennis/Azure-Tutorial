@@ -337,4 +337,7 @@ SLA
   -  Service level agreement
   - the uptime percentage of cloud service with table
 
-
+SLA Calculator
+  -  
+Cost
+  -  pricing model
