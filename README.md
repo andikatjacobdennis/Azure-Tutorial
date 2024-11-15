@@ -196,7 +196,7 @@ Azure CLI and powershell
   -  az group create -l westus -n CLITest-rg
   -  New-AzResourceGroup -Name PSTest-rg -Location westus 
 
-What is a resource group
+What is a resource group with example
 
 
 
