@@ -1,7 +1,5 @@
 ## **Azure-Tutorial**
 
----
-
 ### **CapEx vs. OpEx**
 
 - **CapEx (Capital Expenditure):**  
