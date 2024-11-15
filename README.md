@@ -71,19 +71,6 @@ Cloud computing services are categorized into **IaaS**, **PaaS**, and **SaaS**, 
 
 ---
 
-### **Summary of Key Benefits**
-
-| **Type** | **Example** | **Best Use Cases** |
-|----------|-------------|--------------------|
-| **IaaS** | Azure VMs | Full control over infrastructure. Ideal for migrations and scaling. |
-| **PaaS** | Azure App Service | Streamlined application development and deployment. |
-| **SaaS** | Microsoft 365 | Subscription-based software for end users. |
-| **Public Cloud** | Azure, AWS | Scalable and cost-effective shared resources. |
-| **Private Cloud** | Azure Stack | High security and control for sensitive workloads. |
-| **Hybrid Cloud** | Azure Arc | Flexibility to balance between public and private. |
-
----
-
 
 
 
