@@ -341,3 +341,4 @@ SLA Calculator
   -  
 Cost
   -  pricing model
+  -  Example
