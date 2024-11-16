@@ -468,3 +468,8 @@ Connect to VM
 
 Availability of VM
 
+Availability concepts in Azure
+  - Fault Domain
+  - Update Domain
+  - Availability Set
+  - Availability Zone
