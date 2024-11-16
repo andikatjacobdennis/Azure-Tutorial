@@ -444,3 +444,5 @@ To estimate the cost of resources:
 
 ---
 
+Azure Compute
+
