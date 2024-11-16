@@ -544,3 +544,7 @@ Azure provides several options to enhance the availability and reliability of yo
 ### **Availability Zone**
    - Physically separate data centers within an Azure region.
    - VMs deployed across Availability Zones provide high availability and resilience to data center failures.
+
+Creating available and cost effective VM
+
+
