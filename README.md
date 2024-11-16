@@ -462,5 +462,9 @@ Virtual Machine Architecture
 
 VM Density
 
-Steps for creating the VM
+Steps for creating the VM in India
+
+Connect to VM
+
+Availability of VM
 
