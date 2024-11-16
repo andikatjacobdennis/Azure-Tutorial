@@ -446,3 +446,10 @@ To estimate the cost of resources:
 
 Azure Compute
 
+4 types of compute service
+
+- Virtual Machines
+- App Services
+- AKS
+- Azure Functions
+
