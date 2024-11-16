@@ -453,3 +453,14 @@ Azure Compute
 - AKS
 - Azure Functions
 
+Virtual Machine Architecture
+- Code
+- Binarys/Librarys
+- Guest OS
+- Hypervisor
+- HOST OS
+
+VM Density
+
+Steps for creating the VM
+
