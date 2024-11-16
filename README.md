@@ -444,32 +444,103 @@ To estimate the cost of resources:
 
 ---
 
-Azure Compute
+## **Azure Compute Services Overview**
 
-4 types of compute service
+### 1. **Virtual Machines (VMs)**
+   - **Definition**: Azure Virtual Machines provide an Infrastructure as a Service (IaaS) that allows users to deploy and manage their operating systems, applications, and software configurations.
+   - **Key Features**: Full OS control, custom configurations, scaling options, and availability.
 
-- Virtual Machines
-- App Services
-- AKS
-- Azure Functions
+### 2. **App Services**
+   - **Definition**: A Platform as a Service (PaaS) for hosting web applications, RESTful APIs, and mobile app backends without managing the underlying infrastructure.
+   - **Key Features**: Auto-scaling, DevOps integration, CI/CD support.
 
-Virtual Machine Architecture
-- Code
-- Binarys/Librarys
-- Guest OS
-- Hypervisor
-- HOST OS
+### 3. **Azure Kubernetes Service (AKS)**
+   - **Definition**: A managed Kubernetes service that simplifies deploying, scaling, and managing containerized applications.
+   - **Key Features**: Automated updates, security, monitoring, and integrated CI/CD pipelines.
 
-VM Density
+### 4. **Azure Functions**
+   - **Definition**: A serverless compute service that lets users run small pieces of code without provisioning or managing servers.
+   - **Key Features**: Event-driven execution, pay-per-use model, and integration with Azure services like Event Grid and Logic Apps.
 
-Steps for creating the VM in India
+---
 
-Connect to VM
+## **Virtual Machine Architecture**
 
-Availability of VM
+Azure Virtual Machines are built on a layered architecture:
 
-Availability concepts in Azure
-  - Fault Domain
-  - Update Domain
-  - Availability Set
-  - Availability Zone
+1. **Code**: Applications or services hosted on the VM.
+2. **Binaries/Libraries**: The runtime dependencies or frameworks required by the code.
+3. **Guest OS**: The operating system installed on the virtual machine (e.g., Windows, Linux).
+4. **Hypervisor**: Software that virtualizes the physical hardware, allowing multiple VMs to run on a single host.
+5. **Host OS**: The operating system running on the physical server, managed by Azure.
+6. **VM Density**: The number of virtual machines that can run on a single host machine.
+
+---
+
+## **Steps to Create a Virtual Machine in Azure (India Region)**
+
+1. **Log in to Azure Portal**
+   - Go to [Azure Portal](https://portal.azure.com) and sign in with your credentials.
+
+2. **Navigate to Virtual Machines**
+   - Search for **Virtual Machines** in the top search bar and click **Create** > **Azure Virtual Machine**.
+
+3. **Configure Basic Settings**
+   - **Subscription**: Select your Azure subscription.
+   - **Resource Group**: Create a new one or use an existing group.
+   - **Region**: Select **India** (Central India, South India, or West India).
+   - **Image**: Choose an OS image (e.g., Windows Server 2022, Ubuntu 20.04).
+   - **Size**: Pick a VM size based on your workload.
+
+4. **Configure Administrator Account**
+   - Username: Enter a username.
+   - Authentication Type: Select Password or SSH Public Key.
+   - Password: If applicable, set a secure password.
+
+5. **Networking**
+   - Create or select a Virtual Network (VNet).
+   - Configure Public IP address and Network Security Groups (NSGs).
+
+6. **Disks and Advanced Settings**
+   - Choose disk type (Standard HDD, Premium SSD).
+   - Configure additional options like monitoring, auto-shutdown, and tags.
+
+7. **Review and Create**
+   - Review all configurations, validate, and click **Create**.
+
+---
+
+## **Connecting to a Virtual Machine**
+
+1. **Using RDP (Windows VM)**
+   - Download the RDP file from the Azure Portal.
+   - Open the file and connect using the administrator username and password.
+
+2. **Using SSH (Linux VM)**
+   - Open a terminal and run:
+     ```bash
+     ssh username@<Public-IP>
+     ```
+   - Use your SSH key or password for authentication.
+
+---
+
+## **Availability of Virtual Machines**
+
+Azure provides several options to enhance the availability and reliability of your VMs:
+
+### **Fault Domain**
+   - A logical group of hardware that shares a common power source and network switch.
+   - Spreading VMs across multiple fault domains reduces the risk of hardware failures affecting all VMs.
+
+### **Update Domain**
+   - A logical group of VMs that are updated together during planned maintenance.
+   - Ensures that updates occur without downtime for all VMs in a deployment.
+
+### **Availability Set**
+   - Groups VMs to distribute them across multiple fault domains and update domains.
+   - Designed to protect against hardware failures and planned maintenance.
+
+### **Availability Zone**
+   - Physically separate data centers within an Azure region.
+   - VMs deployed across Availability Zones provide high availability and resilience to data center failures.
