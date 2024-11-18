@@ -675,6 +675,8 @@ Using Deploying Slots
   - Swap slots
 
 Deployment Types
-
+- Basic Deployment
+- Rolling Deployment
+- Blue Green Deployment
 
 
