@@ -563,5 +563,7 @@ Using Scale Set
   -  az provider show --namespace microsoft.insights -o table
 
 Azure Instance Metadata Service
+-  http://169.254.169.254/metadata/instance?api-version=2021-12-13
+-  http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01
 
 
