@@ -557,6 +557,8 @@ Using Azure Template
 
 VM Scale Set
 
+Using Scale Set
+
 
 
 
