@@ -551,5 +551,7 @@ ARM Template
   - Azure Resourse Manager Template
 
 Using Azure Template
+  - Download the parameter and template
+  - upload using cli tool 
 
 
