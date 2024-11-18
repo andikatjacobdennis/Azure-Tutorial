@@ -805,5 +805,10 @@ Use two environments: one for the live application (blue) and one for the new ve
 
 ---
 
+Containers
+  -  Containers vs VM
+  -  Why container
 
-- 
+Docker
+  -  Docker Architecture (build, pull, run, daemon, container, Registry)
+  -  
