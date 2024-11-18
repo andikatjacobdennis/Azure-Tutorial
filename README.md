@@ -566,4 +566,5 @@ Azure Instance Metadata Service
 -  http://169.254.169.254/metadata/instance?api-version=2021-12-13
 -  http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01
 
-
+Setting up the catalog app
+  -  publish a asp .net core 8 website and hosting it in vm using iis and .net 8 runtime hosting bundle
