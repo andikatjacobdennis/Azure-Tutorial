@@ -987,6 +987,158 @@ kubectl get pods
 kubectl get services
 ```
 
-Azure Functions
-  -  Triggers vs Bindings
-  -  Hosting plan
+## **Azure Functions**
+
+Azure Functions is a **serverless compute service** that allows you to run small pieces of code without worrying about the underlying infrastructure. These functions can be triggered by various events and are highly scalable.
+
+### **Triggers vs. Bindings**
+
+- **Triggers**: Triggers define **how a function starts**. They are event sources that invoke the function. For example:
+  - **HTTP Trigger**: Activates the function when an HTTP request is received.
+  - **Timer Trigger**: Activates based on a defined schedule.
+  - **Queue Trigger**: Reacts to messages added to a storage queue.
+  
+  Example of a trigger in `function.json` for an HTTP trigger:
+  ```json
+  {
+      "type": "httpTrigger",
+      "direction": "in",
+      "authLevel": "function",
+      "methods": ["get", "post"]
+  }
+  ```
+
+- **Bindings**: Bindings simplify the interaction with other Azure services. They connect functions to data or services **without writing extensive boilerplate code**. Bindings can be **input** (reading from a data source) or **output** (writing to a data source).
+
+  Example of a binding:
+  ```json
+  {
+      "type": "queue",
+      "direction": "out",
+      "name": "myQueueItem",
+      "queueName": "myqueue",
+      "connection": "AzureWebJobsStorage"
+  }
+  ```
+
+  **Key Difference**: 
+  - Triggers start a function, whereas bindings connect the function to external resources.
+
+---
+
+### **Hosting Plans**
+
+Azure Functions can run on three hosting plans:
+
+1. **Consumption Plan**:
+   - **Pay-per-execution model**.
+   - Autoscaling happens automatically.
+   - Best for sporadic workloads or unpredictable traffic.
+
+2. **Premium Plan**:
+   - Fixed pre-warmed instances for **faster cold starts**.
+   - Can connect to virtual networks.
+   - Best for applications requiring high performance and predictable latency.
+
+3. **Dedicated (App Service) Plan**:
+   - Runs on **App Service plans**, which means predictable costs.
+   - Ideal for applications that are part of a broader app service setup.
+
+---
+
+## **Durable Functions**
+
+Durable Functions extend Azure Functions to handle **stateful workflows**. They enable **long-running orchestrations** by managing state automatically. 
+
+- **Orchestrator Functions**: Define the workflow logic.
+- **Activity Functions**: Perform specific tasks or operations.
+- **Client Functions**: Start or signal orchestrators.
+
+Example use cases:
+- Chaining tasks (e.g., process orders step by step).
+- Fan-out/fan-in for parallel processing.
+- Handling human interaction (e.g., waiting for user approval).
+
+---
+
+## **Running Functions Locally**
+
+You can develop and debug Azure Functions locally using the **Azure Functions Core Tools**. 
+
+1. **Install Azure Functions Core Tools**:
+   Run:
+   ```bash
+   npm install -g azure-functions-core-tools@4
+   ```
+
+2. **Create a New Function App**:
+   Use the Azure Functions CLI to create a new project:
+   ```bash
+   func init MyFunctionApp --worker-runtime node
+   ```
+
+3. **Add a Function**:
+   ```bash
+   func new
+   ```
+
+4. **Run the Function Locally**:
+   ```bash
+   func start
+   ```
+
+5. Use tools like **Postman** or a browser to test HTTP triggers.
+
+---
+
+## **Running Functions in Azure**
+
+1. **Publish to Azure**:
+   From the Azure CLI:
+   ```bash
+   func azure functionapp publish <YourAppName>
+   ```
+
+2. **Monitor and Debug**:
+   Use **Application Insights** to monitor logs, performance metrics, and errors.
+
+---
+
+## **How to Choose a Compute Type**
+
+Choosing the right compute type in Azure depends on the application's needs:
+- **Serverless (Azure Functions)**: Ideal for event-driven, short-lived tasks (e.g., data processing).
+- **Containerized Workloads**: Use if portability and container orchestration are critical.
+- **Logic Apps**: Best for workflows integrating multiple services with minimal coding.
+
+---
+
+## **More Compute Options**
+
+### **Logic Apps**
+
+Logic Apps is a **workflow automation platform** for integrating apps, data, and services. It is designed for scenarios like:
+- Connecting on-premise and cloud systems.
+- Automating workflows (e.g., approvals, email alerts).
+- Visual designer simplifies the process.
+
+---
+
+### **Azure Container Instances (ACI)**
+
+Azure Container Instances allows you to run **Docker containers directly in Azure**, without managing infrastructure. Key features:
+- Fast and cost-effective container orchestration.
+- Suitable for isolated tasks or microservices.
+- Supports Linux and Windows containers.
+
+---
+
+### **App Service Container**
+
+This allows you to deploy **containerized applications** in Azure App Service. Key advantages:
+- Combines the flexibility of containers with the power of App Services.
+- Provides features like custom domains, SSL, and scaling.
+- Great for web apps needing container environments.
+
+---
+
