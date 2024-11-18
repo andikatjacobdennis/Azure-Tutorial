@@ -562,5 +562,6 @@ Using Scale Set
   -  Decresse by 1
   -  az provider show --namespace microsoft.insights -o table
 
+Azure Instance Metadata Service
 
 
