@@ -810,5 +810,8 @@ Containers
   -  Why container
 
 Docker
-  -  Docker Architecture (build, pull, run, daemon, container, Registry)
-  -  
+  -  Docker Architecture (clent build, pull, run, Host, daemon, container, Registry)
+  -  dockerfile
+
+Kubernetics
+
