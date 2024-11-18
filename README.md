@@ -665,6 +665,11 @@ App service tiers
 Auto scaling App services
 
 Setting up and deploying a webapp
+- Outbound IP Address
+
+Deployment Slots
+
+Uing Deploying Slots
 
 
 
