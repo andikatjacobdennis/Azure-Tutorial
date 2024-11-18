@@ -989,4 +989,4 @@ kubectl get services
 
 Azure Functions
   -  Triggers vs Bindings
-  -  
+  -  Hosting plan
