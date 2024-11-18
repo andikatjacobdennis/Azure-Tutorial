@@ -805,29 +805,188 @@ Use two environments: one for the live application (blue) and one for the new ve
 
 ---
 
-Containers
-  -  Containers vs VM
-  -  Why container
+## **Introduction to Containers**
+Containers have revolutionized the way applications are developed, deployed, and managed. Below, we explore the basics of containers and their advantages over traditional virtual machines (VMs).
 
-Docker
-  -  Docker Architecture (clent build, pull, run, Host, daemon, container, Registry)
-  -  dockerfile
+### **Containers vs. Virtual Machines (VMs)**
+| **Feature**       | **Containers**                          | **Virtual Machines**                 |
+|--------------------|------------------------------------------|---------------------------------------|
+| **Isolation**      | Lightweight process isolation           | Full OS-level isolation               |
+| **Startup Time**   | Starts in seconds                       | Takes minutes                         |
+| **Resource Usage** | Shares OS kernel; uses fewer resources  | Requires full OS; higher resource use |
+| **Portability**    | Consistent across environments          | Limited portability                   |
 
-Introduction to Kubernetics
+### **Why Containers?**
+- **Efficiency**: Containers are lightweight, starting quickly and using fewer resources.
+- **Portability**: Applications bundled in containers run the same way in any environment, reducing "it works on my machine" issues.
+- **Scalability**: Easy to scale horizontally, making containers ideal for microservices.
 
+---
+
+## **Introduction to Docker**
+
+### **Docker Architecture**
+Docker simplifies containerization by providing tools and a platform to build, ship, and run containers. Here's an overview of its components:
+
+1. **Docker Client**: Used to interact with the Docker daemon (`docker build`, `docker run`).
+2. **Docker Daemon (Engine)**: The core service managing containers, images, and networks.
+3. **Containers**: Lightweight instances of images running in isolated environments.
+4. **Images**: Immutable, pre-configured environments (OS, dependencies, application).
+5. **Docker Registry**: A repository for storing and sharing container images. Examples include Docker Hub and Azure Container Registry.
+6. **Dockerfile**: A text file containing instructions to build a Docker image.
+
+### **Dockerfile**
+A `Dockerfile` is essential for automating the creation of Docker images. Below is a simple example:
+
+```dockerfile
+# Use base image
+FROM node:16
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy app source code
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Run the app
+CMD ["npm", "start"]
+```
+
+Build an image using a `Dockerfile`:
+```bash
+docker build -t my-app:1.0 .
+```
+
+---
+
+## **Introduction to Kubernetes (K8s)**
+Kubernetes is a container orchestration platform that automates deployment, scaling, and management of containerized applications.
+
+### **Key Features**
+- **Scalability**: Automatically scale containers based on demand.
+- **Self-Healing**: Restarts failed containers and replaces unresponsive nodes.
+- **Load Balancing**: Distributes traffic across containers.
+- **Declarative Management**: Desired states are defined in YAML files.
+
+### **Basic Kubernetes Terminology**
+- **Pod**: The smallest deployable unit in Kubernetes; often contains one container.
+- **Node**: A worker machine in a Kubernetes cluster.
+- **Cluster**: A set of nodes managed by a master node.
+- **Deployment**: Manages pods and ensures desired states are maintained.
+
+---
+
+## **Building and Pushing Images with Azure**
+### **Azure Container Registry (ACR)**
+ACR is a private registry to store Docker images securely. Here's how to build and push an image:
+
+```bash
 az acr build --image cart:v1 --registry <REGISTRY NAME> --file Dockerfile .
+```
 
-Working with containers
-  -  Container Registries
-  -  Installing Docker in VS Code
-  -  Build image in Azure
+### **Steps to Work with Containers in Azure**
+1. **Install Docker in VS Code**
+   - Install the Docker extension in Visual Studio Code.
+   - Install Docker Desktop on your local machine.
 
-Working with AKS cluster
+2. **Build an Image**
+   Use the Azure CLI to build a container image:
+   ```bash
+   az acr build --image <IMAGE_NAME> --registry <REGISTRY_NAME> --file Dockerfile .
+   ```
 
-az aks install-cli
-Set PATH
-az login
-az aks get-credentials --resource-group readit-app-rg --name cart-aks
-kubectl get nodes
-kubectl apply –f deployment.yaml
+3. **Push to Registry**
+   Push the image to ACR or Docker Hub for sharing.
 
+---
+
+## **Working with AKS (Azure Kubernetes Service)**
+AKS simplifies the deployment and management of Kubernetes clusters in Azure.
+
+### **Setup AKS Cluster**
+1. **Install Kubernetes CLI**:
+   ```bash
+   az aks install-cli
+   ```
+2. **Set PATH**: Ensure `kubectl` is available in your system path.
+
+3. **Authenticate with Azure**:
+   ```bash
+   az login
+   ```
+
+4. **Get Cluster Credentials**:
+   Connect to your AKS cluster:
+   ```bash
+   az aks get-credentials --resource-group <RESOURCE_GROUP> --name <CLUSTER_NAME>
+   ```
+
+5. **Verify Nodes**:
+   Ensure your cluster nodes are ready:
+   ```bash
+   kubectl get nodes
+   ```
+
+6. **Deploy Applications**:
+   Apply your Kubernetes deployment configuration:
+   ```bash
+   kubectl apply -f deployment.yaml
+   ```
+
+### **Example deployment.yaml**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-app
+  labels:
+    app: cart
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      containers:
+      - name: cart
+        image: <ACR_NAME>.azurecr.io/cart:v1
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-service
+spec:
+  selector:
+    app: cart
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
+```
+
+### **Monitor the Deployment**
+Check the status of your deployment and services:
+```bash
+kubectl get pods
+kubectl get services
+```
+
+Azure Functions
+  -  Triggers vs Bindings
+  -  
