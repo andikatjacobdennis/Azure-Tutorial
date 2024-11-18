@@ -669,8 +669,12 @@ Setting up and deploying a webapp
 
 Deployment Slots
 
-Uing Deploying Slots
+Using Deploying Slots
+  - Changing percentage
+  - Using Azure in VS Code to deploy slots
+  - Swap slots
 
+Deployment Types
 
 
 
