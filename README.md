@@ -545,26 +545,102 @@ Azure provides several options to enhance the availability and reliability of yo
    - Physically separate data centers within an Azure region.
    - VMs deployed across Availability Zones provide high availability and resilience to data center failures.
 
-Creating available and cost effective VM
+---
 
-ARM Template
-  - Azure Resourse Manager Template
+### **Part 1: Deploying a Virtual Machine with ARM Templates**
 
-Using Azure Template
-  - Download the parameter and template
-  - upload using cli tool
-    - az deployment group create --resource-group optimized-vm-rg --template-file template.json --parameters parameters.json
+**Azure Resource Manager Template Overview**  
+Azure Resource Manager (ARM) templates are JSON files that define Azure resources. They help automate deployments, ensure consistency, and support infrastructure as code.
 
-VM Scale Set
+---
 
-Using Scale Set
-  -  Increase by 1
-  -  Decresse by 1
-  -  az provider show --namespace microsoft.insights -o table
+#### **Step 1: Using an Azure ARM Template**
+1. **Download the Template**  
+   Start with a predefined ARM template for a VM:
+   - Download the template file `template.json` and a parameters file `parameters.json`.
 
-Azure Instance Metadata Service
--  http://169.254.169.254/metadata/instance?api-version=2021-12-13
--  http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01
+2. **Deploy Using Azure CLI**
+   Upload and deploy the ARM template using the Azure CLI:
+   ```bash
+   az deployment group create --resource-group optimized-vm-rg --template-file template.json --parameters parameters.json
+   ```
+   Replace `optimized-vm-rg` with your Azure Resource Group.
 
-Setting up the catalog app
-  -  publish a asp .net core 8 website and hosting it in vm using iis and .net 8 runtime hosting bundle
+   **Explanation**:
+   - `--template-file`: Specifies the JSON file defining resources.
+   - `--parameters`: Provides customization via parameters.
+
+---
+
+### **Part 2: Configuring a VM Scale Set**
+
+**VM Scale Set Overview**  
+Azure VM Scale Sets allow you to automatically scale the number of VM instances to meet demand, ensuring high availability and cost management.
+
+#### **Step 1: Increasing and Decreasing Instances**
+1. **Increase by 1 Instance**:
+   Scale up the VM Scale Set:
+   ```bash
+   az vmss scale --resource-group optimized-vm-rg --name MyScaleSet --new-capacity <current_capacity+1>
+   ```
+
+2. **Decrease by 1 Instance**:
+   Scale down the VM Scale Set:
+   ```bash
+   az vmss scale --resource-group optimized-vm-rg --name MyScaleSet --new-capacity <current_capacity-1>
+   ```
+
+#### **Step 2: Check Provider Status**
+Check the status of Microsoft Insights:
+```bash
+az provider show --namespace microsoft.insights -o table
+```
+
+---
+
+### **Part 3: Using Azure Instance Metadata Service**
+
+The Azure Instance Metadata Service (IMDS) provides information about the VM environment and scheduled events. It's accessible within the VM through HTTP.
+
+#### **Step 1: Retrieve Instance Metadata**
+Access metadata using a curl command:
+```bash
+curl -H "Metadata:true" "http://169.254.169.254/metadata/instance?api-version=2021-12-13"
+```
+
+#### **Step 2: Fetch Scheduled Events**
+Fetch events like maintenance or VM restart schedules:
+```bash
+curl -H "Metadata:true" "http://169.254.169.254/metadata/scheduledevents?api-version=2020-07-01"
+```
+
+---
+
+### **Part 4: Setting Up the Catalog App**
+
+**Deploying an ASP.NET Core 8 Website**
+
+#### **Step 1: Publish Your ASP.NET Core 8 Website**
+1. Use the `dotnet` CLI to publish:
+   ```bash
+   dotnet publish -c Release -o ./publish
+   ```
+
+2. Transfer the published files to the Azure VM via RDP or SCP.
+
+#### **Step 2: Install and Configure IIS**
+1. **Install IIS**:
+   Use PowerShell to install IIS on the VM:
+   ```powershell
+   Install-WindowsFeature -name Web-Server -IncludeManagementTools
+   ```
+
+2. **Install .NET 8 Hosting Bundle**:
+   Download and install the .NET 8 runtime hosting bundle from the official Microsoft website.
+
+3. **Configure the IIS Site**:
+   - Point the IIS site to the folder containing the published application.
+   - Ensure the application pool is configured for `.NET CLR Version v4.0`.
+
+#### **Step 3: Test the Deployment**
+Access the app in a browser using the VM's public IP or domain.
