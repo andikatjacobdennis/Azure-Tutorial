@@ -645,38 +645,165 @@ curl -H "Metadata:true" "http://169.254.169.254/metadata/scheduledevents?api-ver
 #### **Step 3: Test the Deployment**
 Access the app in a browser using the VM's public IP or domain.
 
-sudo apt install git
-sudo apt update
-sudo apt install nodejs
-sudo git clone https://github.com/memilavi/weatherAPI.git
-cd weatherAPI
-sudo apt install npm
-npm start
+---
 
-private ip address vs public ip address
+## **Setting Up a Node.js Application**
+We’ll use the following commands to set up a Node.js application from a GitHub repository.
 
-how to open the ip address to public internet
+1. **Install Git:**
+   ```bash
+   sudo apt install git
+   ```
 
-App services
-  -  A fully managed web hosting for websites
+2. **Update System Packages:**
+   ```bash
+   sudo apt update
+   ```
 
-App service tiers
+3. **Install Node.js:**
+   ```bash
+   sudo apt install nodejs
+   ```
 
-Auto scaling App services
+4. **Clone the GitHub Repository:**
+   ```bash
+   sudo git clone https://github.com/memilavi/weatherAPI.git
+   ```
 
-Setting up and deploying a webapp
-- Outbound IP Address
+5. **Navigate to the Application Directory:**
+   ```bash
+   cd weatherAPI
+   ```
 
-Deployment Slots
+6. **Install npm:**
+   ```bash
+   sudo apt install npm
+   ```
 
-Using Deploying Slots
-  - Changing percentage
-  - Using Azure in VS Code to deploy slots
-  - Swap slots
+7. **Run the Application:**
+   ```bash
+   npm start
+   ```
 
-Deployment Types
-- Basic Deployment
-- Rolling Deployment
-- Blue Green Deployment
+At this point, your Node.js application should be running locally. 
+
+---
+
+## **Understanding IP Addresses**
+
+- **Private IP Address:** 
+  Used within a private network for communication between internal resources. Private IPs cannot be accessed from the internet.
+
+- **Public IP Address:**
+  Used for communication between resources over the internet. Resources with a public IP are accessible globally.
+
+### **How to Open a Private IP Address to the Public Internet**
+
+1. **Assign a Public IP:** In Azure, assign a public IP to your resource (e.g., a VM or load balancer).
+2. **Create a Network Security Rule:** Ensure the network security group allows inbound traffic on the desired port (e.g., port 80 for HTTP).
+3. **Use Azure Firewall:** To secure the public endpoint while allowing access.
+
+---
+
+## **App Services in Azure**
+Azure **App Services** is a fully managed platform for hosting web applications, RESTful APIs, and mobile backends.
+
+### **Features of App Services:**
+- Handles auto-scaling, load balancing, and patch management.
+- Integrates with CI/CD pipelines for continuous deployment.
+- Supports multiple programming languages (Node.js, Python, .NET, Java).
+
+### **App Service Tiers**
+Azure App Services come in different pricing tiers, each designed for specific use cases:
+1. **Free and Shared (F1/D1):** Basic, shared hosting for testing.
+2. **Basic (B1, B2, B3):** Dedicated computing resources.
+3. **Standard (S1, S2, S3):** Additional features like auto-scaling and staging slots.
+4. **Premium (P1v2, P2v2):** Optimized for production workloads.
+5. **Isolated (I1, I2):** High security and scalability for enterprise needs.
+
+### **Auto Scaling App Services**
+App Services automatically scale out (add instances) or scale up (increase resources) based on:
+- Metrics like CPU and memory usage.
+- Scheduled rules for predictable traffic spikes.
+
+---
+
+## **Setting Up and Deploying a Web App**
+
+### **Configuring Outbound IP Address**
+An **outbound IP address** is used for your application’s communication with external services. Azure assigns these automatically. You can configure a static outbound IP by integrating a NAT Gateway.
+
+---
+
+## **Deployment Slots**
+
+**Deployment Slots** allow you to deploy and test a new version of your application without affecting the production environment.
+
+### **Benefits of Deployment Slots:**
+- Perform A/B testing by routing a percentage of traffic to different slots.
+- Rollback seamlessly by swapping slots if an update fails.
+
+### **Using Deployment Slots**
+1. **Change Traffic Percentage:**
+   - Adjust the percentage of traffic directed to a specific slot in the Azure Portal.
+
+2. **Deploying via Azure in VS Code:**
+   - Use the Azure App Service extension in VS Code to deploy to specific slots.
+   - Connect VS Code to your Azure subscription and select the desired slot during deployment.
+
+3. **Swap Slots:**
+   - Swap the staging slot with production once the new version is verified.
+
+---
+
+## **Deployment Types**
+
+### **Basic Deployment**
+Deploy your application directly to the production environment. Suitable for small projects with minimal risk.
+
+### **Rolling Deployment**
+Deploy updates in small increments across instances to ensure no downtime.
+
+### **Blue-Green Deployment**
+Use two environments: one for the live application (blue) and one for the new version (green). After testing, switch traffic to the green environment.
+
+---
+
+## **Azure Kubernetes Service (AKS)**
+
+**AKS** is Azure’s managed Kubernetes service for deploying, scaling, and managing containerized applications.
+
+### **Key Features of AKS:**
+1. **Simplified Kubernetes Management:**
+   - Automates upgrades and patching of Kubernetes clusters.
+2. **Integration with Azure Services:**
+   - Native integration with Azure Monitor, Azure DevOps, and more.
+3. **Auto Scaling:**
+   - Automatically scales clusters based on demand.
+
+### **Steps to Deploy on AKS:**
+1. **Create an AKS Cluster:**
+   - Use the Azure Portal or CLI to create a Kubernetes cluster.
+   ```bash
+   az aks create --resource-group <resource-group> --name <cluster-name> --node-count 3 --enable-addons monitoring --generate-ssh-keys
+   ```
+
+2. **Connect to the Cluster:**
+   - Install `kubectl` and connect to your cluster.
+   ```bash
+   az aks get-credentials --resource-group <resource-group> --name <cluster-name>
+   ```
+
+3. **Deploy Applications:**
+   - Use `kubectl` to deploy and manage your containers.
+   ```bash
+   kubectl apply -f <deployment-file>.yaml
+   ```
+
+4. **Monitor and Scale:**
+   - Use Azure Monitor and auto-scaling configurations.
+
+---
 
 
+- 
