@@ -547,4 +547,9 @@ Azure provides several options to enhance the availability and reliability of yo
 
 Creating available and cost effective VM
 
+ARM Template
+  - Azure Resourse Manager Template
+
+Using Azure Template
+
 
