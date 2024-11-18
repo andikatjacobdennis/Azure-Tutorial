@@ -552,6 +552,11 @@ ARM Template
 
 Using Azure Template
   - Download the parameter and template
-  - upload using cli tool 
+  - upload using cli tool
+    - az deployment group create --resource-group optimized-vm-rg --template-file template.json --parameters parameters.json
+
+VM Scale Set
+
+
 
 
