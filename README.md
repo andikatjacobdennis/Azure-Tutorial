@@ -558,7 +558,7 @@ Using Azure Template
 VM Scale Set
 
 Using Scale Set
-
+  -  az provider show --namespace microsoft.insights -o table
 
 
 
