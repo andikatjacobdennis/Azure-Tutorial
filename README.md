@@ -644,3 +644,28 @@ curl -H "Metadata:true" "http://169.254.169.254/metadata/scheduledevents?api-ver
 
 #### **Step 3: Test the Deployment**
 Access the app in a browser using the VM's public IP or domain.
+
+sudo apt install git
+sudo apt update
+sudo apt install nodejs
+sudo git clone https://github.com/memilavi/weatherAPI.git
+cd weatherAPI
+sudo apt install npm
+npm start
+
+private ip address vs public ip address
+
+how to open the ip address to public internet
+
+App services
+  -  A fully managed web hosting for websites
+
+App service tiers
+
+Auto scaling App services
+
+Setting up and deploying a webapp
+
+
+
+
