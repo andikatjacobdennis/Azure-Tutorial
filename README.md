@@ -813,5 +813,21 @@ Docker
   -  Docker Architecture (clent build, pull, run, Host, daemon, container, Registry)
   -  dockerfile
 
-Kubernetics
+Introduction to Kubernetics
+
+az acr build --image cart:v1 --registry <REGISTRY NAME> --file Dockerfile .
+
+Working with containers
+  -  Container Registries
+  -  Installing Docker in VS Code
+  -  Build image in Azure
+
+Working with AKS cluster
+
+az aks install-cli
+Set PATH
+az login
+az aks get-credentials --resource-group readit-app-rg --name cart-aks
+kubectl get nodes
+kubectl apply –f deployment.yaml
 
