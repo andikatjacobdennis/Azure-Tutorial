@@ -1326,3 +1326,7 @@ Service Endpoint
 Private Link
 
 Service Endpoint vs Private Link
+
+Access Restrictions
+
+ASE
