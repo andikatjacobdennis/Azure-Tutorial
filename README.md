@@ -1142,3 +1142,26 @@ This allows you to deploy **containerized applications** in Azure App Service. K
 
 ---
 
+Networking in Azure
+
+VNets or Virtual Networks
+  -  A network where you can put cloud resources like VM, DB etc
+  -  Resources in a vnet can communicate with each other but not with other vnets by default but it can be modified
+  -  Its like a private network
+  -  In AWS its called Virtual Private Cloud
+  -  A vnet is scoped to a single region
+  -  A vnet is scoped to a single subscription
+  -  Can be connected by peering
+  -  Segmented to subsets
+  -  Protected using NSG
+
+CIDR Notation
+  -  Classless inter-domain routing
+  -  A method for representing an IP range
+  -  109.186.149.240/24
+  -  0 is min and 255 is max
+  -  each 3 digit is 8 bit so max is 2^8
+  -  here 24 is range
+  -  that means firt three group are allocated to address 8+8+8=24
+  -  and the last one will be for range
+  -  so the range of address is 109.186.149.0 to 109.186.149.255
