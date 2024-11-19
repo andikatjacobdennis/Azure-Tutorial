@@ -1246,9 +1246,9 @@ The prefix length determines the number of bits used for the network part of the
    - All 8 bits are available for the host range, from `0` to `255`.
 
 4. **Final Address Range**:
-   - Start: `109.186.144.0` (binary `1001 0000.00000000`).
-   - End: `109.186.159.255` (binary `1001 1111.11111111`).
-
+   - Start: `XXX.XXX.144.0` (binary `XXXX XXXX.XXXX XXXX.1001 0000.0000 0000`).
+   - End: `XXX.XXXX.159.255` (binary `XXXX XXXX.XXXX XXXX.1001 1111.1111 1111`).
+     -  Here 144 is (1001 0000) and 159 is (1001 1111)
 ---
 
 ### **CIDR Size Calculation Tip**
