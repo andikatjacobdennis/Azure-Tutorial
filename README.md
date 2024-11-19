@@ -1142,37 +1142,152 @@ This allows you to deploy **containerized applications** in Azure App Service. K
 
 ---
 
-Networking in Azure
+# Networking in Azure Tutorial
 
-VNets or Virtual Networks
-  -  A network where you can put cloud resources like VM, DB etc
-  -  Resources in a vnet can communicate with each other but not with other vnets by default but it can be modified
-  -  Its like a private network
-  -  In AWS its called Virtual Private Cloud
-  -  A vnet is scoped to a single region
-  -  A vnet is scoped to a single subscription
-  -  Can be connected by peering
-  -  Segmented to subsets
-  -  Protected using NSG
+## Introduction to Networking in Azure
+Azure provides a robust networking foundation for managing cloud resources. Networking in Azure revolves around **Virtual Networks (VNets)**, which allow you to securely connect, manage, and scale your cloud resources such as Virtual Machines (VMs), databases, and more. This tutorial will guide you through the basics of VNets, CIDR Notation, and related concepts.
 
-CIDR Notation
-  -  Classless inter-domain routing
-  -  A method for representing an IP range
-  -  Example 1
-    -  109.186.149.240/24
-    -  0 is min and 255 is max
-    -  each 3 digit is 8 bit so max is 2^8
-    -  here 24 is range
-    -  that means firt three group are allocated to address 8+8+8=24
-    -  and the last one will be for range
-    -  so the range of address is 109.186.149.0 to 109.186.149.255
-    -  256 address
-  -  Example 2
-    -  109.186.149.240/16
-    -  0 is min and 255 is max
-    -  each 3 digit is 8 bit so max is 2^8
-    -  here 16 is range
-    -  that means firt two group are allocated to address 8+8=16
-    -  and the last two will be for range
-    -  so the range of address is 109.186.0.0 to 109.186.255.255
-     - 65536 address
+---
+
+## **1. Virtual Networks (VNets)**
+
+A **Virtual Network (VNet)** in Azure acts as a private network in the cloud. It is a fundamental building block for managing connectivity and resource communication.
+
+### **Key Features:**
+1. **Resource Communication:**
+   - Resources within a VNet can communicate directly with each other by default.
+   - VNets are isolated from each other by default but can be connected via **peering**.
+
+2. **Private Network:**
+   - VNets operate like private networks, similar to **Virtual Private Cloud (VPC)** in AWS.
+
+3. **Scope:**
+   - **Region-specific:** Each VNet is scoped to a single Azure region.
+   - **Subscription-specific:** Each VNet is also scoped to a single Azure subscription.
+
+4. **Segmentation:**
+   - VNets can be divided into smaller **subnets** to organize and isolate resources.
+
+5. **Security:**
+   - VNets can be protected with **Network Security Groups (NSGs)** to control inbound and outbound traffic.
+
+---
+
+### **VNet Connectivity Options:**
+- **VNet Peering:**
+  - Allows two VNets to connect and communicate with low latency.
+  - Works across regions, enabling global connectivity.
+  
+- **ExpressRoute and VPN Gateway:**
+  - Connect VNets to on-premises networks securely.
+
+---
+
+## **2. CIDR Notation**
+
+CIDR (Classless Inter-Domain Routing) is a way to define IP address ranges for your networks. VNets and subnets use CIDR notation to specify address spaces.
+
+### **CIDR Syntax:**
+```
+<IP Address>/<Prefix Length>
+```
+
+The prefix length determines the number of bits used for the network part of the address. The remaining bits define the range of host addresses.
+
+---
+
+### **CIDR Notation Examples**
+
+#### **Example 1:**
+```
+109.186.149.240/24
+```
+- **Details:**
+  - Prefix length: 24 bits (8 bits for each of the first three groups).
+  - Range: The last 8 bits (256 addresses) are available for hosts.
+  - Address range: `109.186.149.0` to `109.186.149.255` (256 addresses).
+
+---
+
+#### **Example 2:**
+```
+109.186.149.240/16
+```
+- **Details:**
+  - Prefix length: 16 bits (8 bits for the first two groups).
+  - Range: The last 16 bits (65,536 addresses) are available for hosts.
+  - Address range: `109.186.0.0` to `109.186.255.255` (65,536 addresses).
+
+---
+
+#### **Example 3:**
+```
+109.186.149.240/20
+```
+- **Details:**
+  - Prefix length: 20 bits (8 + 8 + 4 bits for the first two and part of the third group).
+  - Range: The last 12 bits (4,096 addresses) are available for hosts.
+  - Address range: `109.186.144.0` to `109.186.159.255` (4,096 addresses).
+
+---
+
+### **How the Range is Calculated for /20**
+
+1. The **third octet (`149`)** is partially used for the network.
+   - `149` in binary: `1001 0101`.
+   - The **first 4 bits** of the third octet (`1001`) are fixed for the network.
+   - The **last 4 bits** of the third octet (`0101`) and the entire fourth octet contribute to the host range.
+
+2. **Third Octet Range**:
+   - The first 4 bits (`1001`) correspond to **144** in decimal (start of the range).
+   - The last 4 bits can vary, allowing values up to `159`.
+
+3. **Fourth Octet Range**:
+   - All 8 bits are available for the host range, from `0` to `255`.
+
+4. **Final Address Range**:
+   - Start: `109.186.144.0` (binary `1001 0000.00000000`).
+   - End: `109.186.159.255` (binary `1001 1111.11111111`).
+
+---
+
+### **CIDR Size Calculation Tip**
+To calculate the size of the address range:
+```
+Size = 2^(32 - Prefix Length)
+```
+
+#### **Examples:**
+1. `109.186.149.240/24`
+   - Size = \( 2^{(32 - 24)} = 2^8 = 256 \) addresses.
+
+2. `109.186.149.240/20`
+   - Size = \( 2^{(32 - 20)} = 2^{12} = 4,096 \) addresses.
+
+---
+
+## **3. Subnetting in VNets**
+VNets can be divided into smaller **subnets** to organize resources. Subnets use portions of the VNet’s address space (defined in CIDR notation).
+
+### **Subnet Benefits:**
+- **Resource Isolation:** Separate resources for better management.
+- **Traffic Control:** Use NSGs to control traffic flow.
+- **Scalability:** Efficiently allocate IP ranges for resource growth.
+
+---
+
+## **4. Security with Network Security Groups (NSGs)**
+- **NSGs** are firewall rules attached to subnets or individual resources within a VNet.
+- They control **inbound** and **outbound** traffic based on rules.
+- Example rules:
+  - Allow HTTP traffic on port 80.
+  - Deny all traffic from specific IP ranges.
+
+---
+
+### **5. CIDR Calculator Tool**
+For ease in calculating address ranges and sizes, use a CIDR calculator:
+- [CIDR Subnet Calculator](https://mxtoolbox.com/subnetcalculator.aspx)
+
+---
+
