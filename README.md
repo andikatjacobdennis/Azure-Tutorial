@@ -1259,11 +1259,14 @@ Size = 2^(32 - Prefix Length)
 
 #### **Examples:**
 1. `109.186.149.240/24`
-   - Size = \( 2^{(32 - 24)} = 2^8 = 256 \) addresses.
+   ```math
+   - Size =  2^{(32 - 24)} = 2^8 = 256  addresses.
+```
 
 2. `109.186.149.240/20`
-   - Size = \( 2^{(32 - 20)} = 2^{12} = 4,096 \) addresses.
-
+   ```math
+   Size =  2^{(32 - 20)} = 2^{12} = 4,096  addresses.
+    ```
 ---
 
 ## **3. Subnetting in VNets**
