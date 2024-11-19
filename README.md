@@ -1299,3 +1299,10 @@ For ease in calculating address ranges and sizes, use a CIDR calculator:
 Subnet
   -  logical sement in a Vnet
   -  Shares a subset of vnets ip range
+  -  Subnet in Azure
+
+Creating a virtual Network
+
+Working with VNets
+
+Network Security Groups
