@@ -1321,3 +1321,8 @@ Secure VM Access
   -  Jump Box
   -  Bastion
 
+Service Endpoint
+
+Private Link
+
+Service Endpoint vs Private Link
