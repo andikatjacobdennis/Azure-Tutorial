@@ -1313,4 +1313,11 @@ Network Peering
 Using network peering
 
 Network Topology
+  -  Network watcher
+  -  
+Secure VM Access
+  -  JIT Access
+  -  VPN
+  -  Jump Box
+  -  Bastion
 
