@@ -1296,42 +1296,136 @@ For ease in calculating address ranges and sizes, use a CIDR calculator:
 
 ---
 
-Subnet
-  -  logical sement in a Vnet
-  -  Shares a subset of vnets ip range
-  -  Subnet in Azure
+## **1. Subnet**
+A **subnet** is a logical segment within a Virtual Network (VNet). Subnets help organize and segregate network traffic for improved performance and security.
 
-Creating a virtual Network
+- **Key Features of a Subnet:**
+  - Shares a subset of a VNet's IP address range.
+  - Allows isolation of resources for better control and governance.
+  - Resources like Virtual Machines (VMs) and Azure services are placed in subnets for optimized communication.
 
-Working with VNets
+---
 
-Network Security Groups
-  - Security Rule
+## **2. Creating a Virtual Network**
+Virtual Networks (VNets) are the foundation of Azure networking. Follow these steps to create a VNet:
 
-Network Peering
+1. **Navigate to the Azure Portal:**
+   - Go to **Create a Resource** > **Networking** > **Virtual Network**.
+2. **Define the VNet Settings:**
+   - **Name**: Specify the name of the VNet.
+   - **Address Space**: Define the CIDR range (e.g., 10.0.0.0/16).
+   - **Region**: Choose the Azure region.
+3. **Add Subnets:**
+   - Specify the name and subnet address range (e.g., 10.0.1.0/24).
+4. **Review and Create:**
+   - Validate settings and click **Create**.
 
-Using network peering
+---
 
-Network Topology
-  -  Network watcher
-  -  
-Secure VM Access
-  -  JIT Access
-  -  VPN
-  -  Jump Box
-  -  Bastion
+## **3. Working with VNets**
+Once a VNet is created, you can:
+- Add additional **subnets** for resource isolation.
+- Attach resources like Virtual Machines to the VNet.
+- Configure **Network Security Groups (NSGs)** for access control.
+- Enable **Service Endpoints** for secure Azure service connections.
 
-Service Endpoint
+---
 
-Private Link
+## **4. Network Security Groups (NSGs)**
+**NSGs** are essential for managing inbound and outbound traffic to Azure resources.
 
-Service Endpoint vs Private Link
+- **Security Rules**:
+  - **Inbound Rules**: Control traffic entering the subnet/resource.
+  - **Outbound Rules**: Control traffic leaving the subnet/resource.
+  - Define rules based on **source**, **destination**, **protocol**, and **port range**.
+  - For example, to allow HTTP traffic, create a rule with:
+    - Source: Any
+    - Destination: Any
+    - Protocol: TCP
+    - Port Range: 80
+    - Action: Allow
 
-Access Restrictions
+---
 
-ASE
-  -  App Service Environment
+## **5. Network Peering**
+**Network Peering** connects VNets within the same or different Azure regions for seamless communication.
 
-Load Balancer
-  -  Load Balancer Types
-  -  
+### **Using Network Peering**
+1. Navigate to one of the VNets in the Azure Portal.
+2. Select **Peerings** and click **Add**.
+3. Specify the target VNet and set the peering configuration.
+4. Enable **Gateway Transit** if needed for cross-region communication.
+5. Once configured, resources in the peered VNets can communicate privately.
+
+---
+
+## **6. Network Topology**
+Understanding and monitoring your Azure network topology is crucial for managing resources and diagnosing issues.
+
+### **Network Watcher**
+Azure's **Network Watcher** provides tools for:
+- Diagnosing connectivity issues.
+- Capturing network traffic with **Packet Capture**.
+- Viewing a **Topology Map** of your VNet.
+
+---
+
+## **7. Secure VM Access**
+Securing access to Virtual Machines is critical for maintaining data integrity and preventing unauthorized access.
+
+### **JIT Access**
+- Use **Just-In-Time (JIT) Access** to minimize exposure by granting time-limited access to VMs.
+
+### **VPN**
+- Establish secure connectivity using a **Virtual Private Network (VPN)**.
+
+### **Jump Box**
+- Deploy a Jump Box (or Bastion Host) as a gateway for managing other VMs.
+
+### **Bastion**
+- Azure **Bastion** provides secure, browser-based RDP and SSH access without exposing VMs to the internet.
+
+---
+
+## **8. Service Endpoint**
+A **Service Endpoint** allows Azure resources in a VNet to securely connect to Azure services like Storage and SQL over the Microsoft backbone network.
+
+---
+
+## **9. Private Link**
+**Private Link** enables private access to Azure services via private IP addresses in your VNet.
+
+### **Service Endpoint vs Private Link**
+| Feature             | Service Endpoint           | Private Link               |
+|---------------------|----------------------------|----------------------------|
+| **Connectivity**    | Over the Azure backbone    | Via private IPs in the VNet |
+| **Access Control**  | At the subnet level        | Granular resource-level control |
+| **Use Case**        | Access Azure services      | Access specific instances of services |
+
+---
+
+## **10. Access Restrictions**
+- Use access restrictions to allow/deny traffic to Azure resources.
+- Define rules based on IP address ranges, VNets, or service tags.
+
+---
+
+## **11. App Service Environment (ASE)**
+The **App Service Environment (ASE)** is a fully isolated environment for running Azure App Services.
+
+- Provides high security and scalability.
+- Ideal for hosting sensitive or high-load applications.
+
+---
+
+## **12. Load Balancer**
+Azure **Load Balancers** distribute traffic across resources for high availability.
+
+### **Load Balancer Types**
+1. **Basic Load Balancer**:
+   - Suitable for small-scale deployments.
+2. **Standard Load Balancer**:
+   - Provides higher scalability, advanced diagnostics, and zone redundancy.
+
+---
+
