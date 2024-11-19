@@ -1158,10 +1158,21 @@ VNets or Virtual Networks
 CIDR Notation
   -  Classless inter-domain routing
   -  A method for representing an IP range
-  -  109.186.149.240/24
-  -  0 is min and 255 is max
-  -  each 3 digit is 8 bit so max is 2^8
-  -  here 24 is range
-  -  that means firt three group are allocated to address 8+8+8=24
-  -  and the last one will be for range
-  -  so the range of address is 109.186.149.0 to 109.186.149.255
+  -  Example 1
+    -  109.186.149.240/24
+    -  0 is min and 255 is max
+    -  each 3 digit is 8 bit so max is 2^8
+    -  here 24 is range
+    -  that means firt three group are allocated to address 8+8+8=24
+    -  and the last one will be for range
+    -  so the range of address is 109.186.149.0 to 109.186.149.255
+    -  256 address
+  -  Example 2
+    -  109.186.149.240/16
+    -  0 is min and 255 is max
+    -  each 3 digit is 8 bit so max is 2^8
+    -  here 16 is range
+    -  that means firt two group are allocated to address 8+8=16
+    -  and the last two will be for range
+    -  so the range of address is 109.186.0.0 to 109.186.255.255
+     - 65536 address
