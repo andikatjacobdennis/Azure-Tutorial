@@ -1330,3 +1330,4 @@ Service Endpoint vs Private Link
 Access Restrictions
 
 ASE
+  -  App Service Environment
