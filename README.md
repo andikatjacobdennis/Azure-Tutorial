@@ -1296,3 +1296,6 @@ For ease in calculating address ranges and sizes, use a CIDR calculator:
 
 ---
 
+Subnet
+  -  logical sement in a Vnet
+  -  Shares a subset of vnets ip range
