@@ -1532,3 +1532,7 @@ By configuring WAF rules and using the port mappings, you ensure secure traffic 
 ---
 
 
+Data in Azure
+
+Major Database Features
+
