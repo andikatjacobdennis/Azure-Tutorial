@@ -1429,3 +1429,106 @@ Azure **Load Balancers** distribute traffic across resources for high availabili
 
 ---
 
+## **1. Azure Application Gateway Overview**
+### Features:
+- **Layer 7 Routing**: Routes requests based on HTTP headers, URLs, hostnames, etc.
+- **SSL Termination**: Handles SSL decryption, reducing load on backend servers.
+- **Autoscaling**: Automatically adjusts based on traffic demands.
+- **Health Monitoring**: Continuously checks the health of backend endpoints.
+- **WAF Integration**: Protects applications from malicious traffic.
+  
+### Use Cases:
+- Hosting multiple web applications behind a single gateway.
+- Enhancing application security with WAF.
+- Improving application performance using connection multiplexing.
+- Centralized control for routing HTTP/HTTPS traffic.
+
+---
+
+## **2. Azure WAF (Web Application Firewall)**
+### What is Azure WAF?
+Azure WAF is a cloud-native security feature within Azure Application Gateway. It defends web applications against vulnerabilities by filtering and monitoring HTTP/HTTPS requests based on predefined or custom rules.
+
+### Modes:
+1. **Detection Mode**: Logs threats but does not block them.
+2. **Prevention Mode**: Actively blocks suspicious requests.
+
+### Core Features:
+- **OWASP Rules**: Predefined rulesets from the Open Web Application Security Project (OWASP).
+- **Custom Rules**: Define rules to block or allow specific traffic based on IP, geolocation, or patterns.
+- **Logging**: Logs all activities for audit and troubleshooting.
+- **Integration**: Seamlessly integrates with Azure Monitor for advanced analytics.
+
+### Steps to Set Up WAF:
+1. **Create an Application Gateway**:
+   - Navigate to the Azure portal.
+   - Create a resource > Select *Application Gateway*.
+   - Configure the resource group, region, and other settings.
+
+2. **Enable WAF**:
+   - During Application Gateway creation, choose the **WAF Tier**.
+   - Configure WAF settings (Detection or Prevention mode).
+
+3. **Define Rules**:
+   - Select default OWASP rules or add custom rules.
+   - Test in Detection mode before switching to Prevention mode.
+
+4. **Associate Backend Pools**:
+   - Add backend web servers or apps as a pool.
+   - Configure HTTP/HTTPS listeners and routing rules.
+
+---
+
+## **3. Understanding Ports**
+### Well-Known Ports (0–1023)
+Ports in this range are reserved for core protocols and services:
+| **Service**                        | **Port** |
+|------------------------------------|----------|
+| FTP (File Transfer Protocol - Data Transfer) | 20       |
+| FTP (Control/Command)              | 21       |
+| SSH (Secure Shell)                 | 22       |
+| Telnet                             | 23       |
+| SMTP (Simple Mail Transfer Protocol) | 25     |
+| DNS (Domain Name System)           | 53       |
+| HTTP (HyperText Transfer Protocol) | 80       |
+| POP3 (Post Office Protocol v3)     | 110      |
+| IMAP (Internet Message Access Protocol) | 143   |
+| HTTPS (HTTP Secure)                | 443      |
+| SNMP (Simple Network Management Protocol) | 161   |
+
+---
+
+### Registered Ports (1024–49151)
+These are semi-standard ports often associated with specific applications:
+| **Service**                        | **Port** |
+|------------------------------------|----------|
+| MySQL Database                     | 3306     |
+| PostgreSQL Database                | 5432     |
+| RDP (Remote Desktop Protocol)      | 3389     |
+| SIP (Session Initiation Protocol - Unencrypted) | 5060  |
+| SIP (Session Initiation Protocol - Encrypted) | 5061   |
+| LDAP (Lightweight Directory Access Protocol) | 389   |
+| SMB (Server Message Block)         | 445      |
+
+---
+
+## **4. Best Practices**
+1. **Enable WAF Prevention Mode**: Switch from Detection to Prevention mode after thorough testing to protect live traffic.
+2. **Secure Backend Communication**: Use HTTPS for communication between Application Gateway and backend servers.
+3. **Restrict Access**: Use Network Security Groups (NSGs) to limit access to the Application Gateway subnet.
+4. **Enable Logging**: Utilize Azure Monitor and Log Analytics for traffic insights.
+5. **Keep Rules Updated**: Regularly update WAF rules to protect against new vulnerabilities.
+
+---
+
+## **5. Example Scenario**
+Suppose you're hosting a multi-tier web application on Azure:
+- The frontend (HTTP/HTTPS) is routed through Application Gateway with WAF enabled.
+- Backend services, such as a MySQL database, use port **3306**.
+- Administrators access virtual machines via RDP on port **3389**.
+
+By configuring WAF rules and using the port mappings, you ensure secure traffic routing and mitigate potential threats to your web application.
+
+---
+
+
